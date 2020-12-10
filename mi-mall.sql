@@ -248,3 +248,248 @@ INSERT INTO `shopping_cart` VALUES (30, 16, 1, 1);
 INSERT INTO `shopping_cart` VALUES (31, 18, 3, 1);
 INSERT INTO `shopping_cart` VALUES (32, 19, 5, 1);
 
+-- ----------------------------
+-- Table structure for seckill_product
+-- ----------------------------
+DROP TABLE IF EXISTS `seckill_product`;
+CREATE TABLE `seckill_product`  (
+    `seckill_id` int(11) NOT NULL AUTO_INCREMENT,
+    `product_id` int(11) NOT NULL,
+    `seckill_price` double DEFAULT NULL,
+    `seckill_stock` int(11) DEFAULT NULL,
+    `time_id` int(11) DEFAULT NULL,
+    PRIMARY KEY (`seckill_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 9127 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of seckill_product
+-- ----------------------------
+INSERT INTO `seckill_product` VALUES (8947, 32, 1000, 100, 694);
+INSERT INTO `seckill_product` VALUES (8948, 1, 1000, 100, 694);
+INSERT INTO `seckill_product` VALUES (8949, 2, 1000, 100, 694);
+INSERT INTO `seckill_product` VALUES (8950, 3, 1000, 100, 694);
+INSERT INTO `seckill_product` VALUES (8951, 10, 1000, 100, 694);
+INSERT INTO `seckill_product` VALUES (8952, 12, 1000, 100, 694);
+INSERT INTO `seckill_product` VALUES (8953, 14, 1000, 100, 694);
+INSERT INTO `seckill_product` VALUES (8954, 17, 1000, 100, 694);
+INSERT INTO `seckill_product` VALUES (8955, 18, 1000, 100, 694);
+INSERT INTO `seckill_product` VALUES (8956, 20, 1000, 100, 694);
+INSERT INTO `seckill_product` VALUES (8957, 21, 1000, 100, 694);
+INSERT INTO `seckill_product` VALUES (8958, 22, 1000, 100, 694);
+INSERT INTO `seckill_product` VALUES (8959, 24, 1000, 100, 694);
+INSERT INTO `seckill_product` VALUES (8960, 26, 1000, 100, 694);
+INSERT INTO `seckill_product` VALUES (8961, 27, 1000, 100, 694);
+INSERT INTO `seckill_product` VALUES (8962, 32, 1000, 100, 695);
+INSERT INTO `seckill_product` VALUES (8963, 4, 1000, 100, 695);
+INSERT INTO `seckill_product` VALUES (8964, 5, 1000, 100, 695);
+INSERT INTO `seckill_product` VALUES (8965, 6, 1000, 100, 695);
+INSERT INTO `seckill_product` VALUES (8966, 7, 1000, 100, 695);
+INSERT INTO `seckill_product` VALUES (8967, 9, 1000, 100, 695);
+INSERT INTO `seckill_product` VALUES (8968, 10, 1000, 100, 695);
+INSERT INTO `seckill_product` VALUES (8969, 12, 1000, 100, 695);
+INSERT INTO `seckill_product` VALUES (8970, 15, 1000, 100, 695);
+INSERT INTO `seckill_product` VALUES (8971, 16, 1000, 100, 695);
+INSERT INTO `seckill_product` VALUES (8972, 22, 1000, 100, 695);
+INSERT INTO `seckill_product` VALUES (8973, 25, 1000, 100, 695);
+INSERT INTO `seckill_product` VALUES (8974, 26, 1000, 100, 695);
+INSERT INTO `seckill_product` VALUES (8975, 29, 1000, 100, 695);
+INSERT INTO `seckill_product` VALUES (8976, 30, 1000, 100, 695);
+INSERT INTO `seckill_product` VALUES (8977, 2, 1000, 100, 696);
+INSERT INTO `seckill_product` VALUES (8978, 35, 1000, 100, 696);
+INSERT INTO `seckill_product` VALUES (8979, 6, 1000, 100, 696);
+INSERT INTO `seckill_product` VALUES (8980, 9, 1000, 100, 696);
+INSERT INTO `seckill_product` VALUES (8981, 10, 1000, 100, 696);
+INSERT INTO `seckill_product` VALUES (8982, 11, 1000, 100, 696);
+INSERT INTO `seckill_product` VALUES (8983, 15, 1000, 100, 696);
+INSERT INTO `seckill_product` VALUES (8984, 17, 1000, 100, 696);
+INSERT INTO `seckill_product` VALUES (8985, 18, 1000, 100, 696);
+INSERT INTO `seckill_product` VALUES (8986, 19, 1000, 100, 696);
+INSERT INTO `seckill_product` VALUES (8987, 26, 1000, 100, 696);
+INSERT INTO `seckill_product` VALUES (8988, 27, 1000, 100, 696);
+INSERT INTO `seckill_product` VALUES (8989, 28, 1000, 100, 696);
+INSERT INTO `seckill_product` VALUES (8990, 29, 1000, 100, 696);
+INSERT INTO `seckill_product` VALUES (8991, 31, 1000, 100, 696);
+INSERT INTO `seckill_product` VALUES (8992, 32, 1000, 100, 697);
+INSERT INTO `seckill_product` VALUES (8993, 33, 1000, 100, 697);
+INSERT INTO `seckill_product` VALUES (8994, 2, 1000, 100, 697);
+INSERT INTO `seckill_product` VALUES (8995, 35, 1000, 100, 697);
+INSERT INTO `seckill_product` VALUES (8996, 3, 1000, 100, 697);
+INSERT INTO `seckill_product` VALUES (8997, 8, 1000, 100, 697);
+INSERT INTO `seckill_product` VALUES (8998, 9, 1000, 100, 697);
+INSERT INTO `seckill_product` VALUES (8999, 12, 1000, 100, 697);
+INSERT INTO `seckill_product` VALUES (9000, 14, 1000, 100, 697);
+INSERT INTO `seckill_product` VALUES (9001, 17, 1000, 100, 697);
+INSERT INTO `seckill_product` VALUES (9002, 18, 1000, 100, 697);
+INSERT INTO `seckill_product` VALUES (9003, 19, 1000, 100, 697);
+INSERT INTO `seckill_product` VALUES (9004, 27, 1000, 100, 697);
+INSERT INTO `seckill_product` VALUES (9005, 28, 1000, 100, 697);
+INSERT INTO `seckill_product` VALUES (9006, 31, 1000, 100, 697);
+INSERT INTO `seckill_product` VALUES (9007, 32, 1000, 100, 698);
+INSERT INTO `seckill_product` VALUES (9008, 33, 1000, 100, 698);
+INSERT INTO `seckill_product` VALUES (9009, 4, 1000, 100, 698);
+INSERT INTO `seckill_product` VALUES (9010, 8, 1000, 100, 698);
+INSERT INTO `seckill_product` VALUES (9011, 10, 1000, 100, 698);
+INSERT INTO `seckill_product` VALUES (9012, 11, 1000, 100, 698);
+INSERT INTO `seckill_product` VALUES (9013, 17, 1000, 100, 698);
+INSERT INTO `seckill_product` VALUES (9014, 18, 1000, 100, 698);
+INSERT INTO `seckill_product` VALUES (9015, 21, 1000, 100, 698);
+INSERT INTO `seckill_product` VALUES (9016, 22, 1000, 100, 698);
+INSERT INTO `seckill_product` VALUES (9017, 25, 1000, 100, 698);
+INSERT INTO `seckill_product` VALUES (9018, 26, 1000, 100, 698);
+INSERT INTO `seckill_product` VALUES (9019, 28, 1000, 100, 698);
+INSERT INTO `seckill_product` VALUES (9020, 30, 1000, 100, 698);
+INSERT INTO `seckill_product` VALUES (9021, 31, 1000, 100, 698);
+INSERT INTO `seckill_product` VALUES (9022, 34, 1000, 100, 699);
+INSERT INTO `seckill_product` VALUES (9023, 3, 1000, 100, 699);
+INSERT INTO `seckill_product` VALUES (9024, 4, 1000, 100, 699);
+INSERT INTO `seckill_product` VALUES (9025, 6, 1000, 100, 699);
+INSERT INTO `seckill_product` VALUES (9026, 7, 1000, 100, 699);
+INSERT INTO `seckill_product` VALUES (9027, 9, 1000, 100, 699);
+INSERT INTO `seckill_product` VALUES (9028, 15, 1000, 100, 699);
+INSERT INTO `seckill_product` VALUES (9029, 17, 1000, 100, 699);
+INSERT INTO `seckill_product` VALUES (9030, 19, 1000, 100, 699);
+INSERT INTO `seckill_product` VALUES (9031, 20, 1000, 100, 699);
+INSERT INTO `seckill_product` VALUES (9032, 22, 1000, 100, 699);
+INSERT INTO `seckill_product` VALUES (9033, 23, 1000, 100, 699);
+INSERT INTO `seckill_product` VALUES (9034, 26, 1000, 100, 699);
+INSERT INTO `seckill_product` VALUES (9035, 29, 1000, 100, 699);
+INSERT INTO `seckill_product` VALUES (9036, 31, 1000, 100, 699);
+INSERT INTO `seckill_product` VALUES (9037, 32, 1000, 100, 700);
+INSERT INTO `seckill_product` VALUES (9038, 1, 1000, 100, 700);
+INSERT INTO `seckill_product` VALUES (9039, 33, 1000, 100, 700);
+INSERT INTO `seckill_product` VALUES (9040, 2, 1000, 100, 700);
+INSERT INTO `seckill_product` VALUES (9041, 35, 1000, 100, 700);
+INSERT INTO `seckill_product` VALUES (9042, 3, 1000, 100, 700);
+INSERT INTO `seckill_product` VALUES (9043, 5, 1000, 100, 700);
+INSERT INTO `seckill_product` VALUES (9044, 6, 1000, 100, 700);
+INSERT INTO `seckill_product` VALUES (9045, 8, 1000, 100, 700);
+INSERT INTO `seckill_product` VALUES (9046, 18, 1000, 100, 700);
+INSERT INTO `seckill_product` VALUES (9047, 20, 1000, 100, 700);
+INSERT INTO `seckill_product` VALUES (9048, 21, 1000, 100, 700);
+INSERT INTO `seckill_product` VALUES (9049, 24, 1000, 100, 700);
+INSERT INTO `seckill_product` VALUES (9050, 25, 1000, 100, 700);
+INSERT INTO `seckill_product` VALUES (9051, 26, 1000, 100, 700);
+INSERT INTO `seckill_product` VALUES (9052, 32, 1000, 100, 701);
+INSERT INTO `seckill_product` VALUES (9053, 33, 1000, 100, 701);
+INSERT INTO `seckill_product` VALUES (9054, 2, 1000, 100, 701);
+INSERT INTO `seckill_product` VALUES (9055, 4, 1000, 100, 701);
+INSERT INTO `seckill_product` VALUES (9056, 5, 1000, 100, 701);
+INSERT INTO `seckill_product` VALUES (9057, 7, 1000, 100, 701);
+INSERT INTO `seckill_product` VALUES (9058, 8, 1000, 100, 701);
+INSERT INTO `seckill_product` VALUES (9059, 9, 1000, 100, 701);
+INSERT INTO `seckill_product` VALUES (9060, 11, 1000, 100, 701);
+INSERT INTO `seckill_product` VALUES (9061, 16, 1000, 100, 701);
+INSERT INTO `seckill_product` VALUES (9062, 20, 1000, 100, 701);
+INSERT INTO `seckill_product` VALUES (9063, 23, 1000, 100, 701);
+INSERT INTO `seckill_product` VALUES (9064, 26, 1000, 100, 701);
+INSERT INTO `seckill_product` VALUES (9065, 28, 1000, 100, 701);
+INSERT INTO `seckill_product` VALUES (9066, 30, 1000, 100, 701);
+INSERT INTO `seckill_product` VALUES (9067, 1, 1000, 100, 702);
+INSERT INTO `seckill_product` VALUES (9068, 34, 1000, 100, 702);
+INSERT INTO `seckill_product` VALUES (9069, 35, 1000, 100, 702);
+INSERT INTO `seckill_product` VALUES (9070, 4, 1000, 100, 702);
+INSERT INTO `seckill_product` VALUES (9071, 7, 1000, 100, 702);
+INSERT INTO `seckill_product` VALUES (9072, 8, 1000, 100, 702);
+INSERT INTO `seckill_product` VALUES (9073, 9, 1000, 100, 702);
+INSERT INTO `seckill_product` VALUES (9074, 15, 1000, 100, 702);
+INSERT INTO `seckill_product` VALUES (9075, 17, 1000, 100, 702);
+INSERT INTO `seckill_product` VALUES (9076, 18, 1000, 100, 702);
+INSERT INTO `seckill_product` VALUES (9077, 19, 1000, 100, 702);
+INSERT INTO `seckill_product` VALUES (9078, 21, 1000, 100, 702);
+INSERT INTO `seckill_product` VALUES (9079, 22, 1000, 100, 702);
+INSERT INTO `seckill_product` VALUES (9080, 23, 1000, 100, 702);
+INSERT INTO `seckill_product` VALUES (9081, 27, 1000, 100, 702);
+INSERT INTO `seckill_product` VALUES (9082, 1, 1000, 100, 703);
+INSERT INTO `seckill_product` VALUES (9083, 33, 1000, 100, 703);
+INSERT INTO `seckill_product` VALUES (9084, 3, 1000, 100, 703);
+INSERT INTO `seckill_product` VALUES (9085, 35, 1000, 100, 703);
+INSERT INTO `seckill_product` VALUES (9086, 6, 1000, 100, 703);
+INSERT INTO `seckill_product` VALUES (9087, 10, 1000, 100, 703);
+INSERT INTO `seckill_product` VALUES (9088, 15, 1000, 100, 703);
+INSERT INTO `seckill_product` VALUES (9089, 16, 1000, 100, 703);
+INSERT INTO `seckill_product` VALUES (9090, 17, 1000, 100, 703);
+INSERT INTO `seckill_product` VALUES (9091, 19, 1000, 100, 703);
+INSERT INTO `seckill_product` VALUES (9092, 23, 1000, 100, 703);
+INSERT INTO `seckill_product` VALUES (9093, 25, 1000, 100, 703);
+INSERT INTO `seckill_product` VALUES (9094, 26, 1000, 100, 703);
+INSERT INTO `seckill_product` VALUES (9095, 29, 1000, 100, 703);
+INSERT INTO `seckill_product` VALUES (9096, 30, 1000, 100, 703);
+INSERT INTO `seckill_product` VALUES (9097, 1, 1000, 100, 704);
+INSERT INTO `seckill_product` VALUES (9098, 34, 1000, 100, 704);
+INSERT INTO `seckill_product` VALUES (9099, 6, 1000, 100, 704);
+INSERT INTO `seckill_product` VALUES (9100, 8, 1000, 100, 704);
+INSERT INTO `seckill_product` VALUES (9101, 9, 1000, 100, 704);
+INSERT INTO `seckill_product` VALUES (9102, 12, 1000, 100, 704);
+INSERT INTO `seckill_product` VALUES (9103, 14, 1000, 100, 704);
+INSERT INTO `seckill_product` VALUES (9104, 15, 1000, 100, 704);
+INSERT INTO `seckill_product` VALUES (9105, 16, 1000, 100, 704);
+INSERT INTO `seckill_product` VALUES (9106, 18, 1000, 100, 704);
+INSERT INTO `seckill_product` VALUES (9107, 23, 1000, 100, 704);
+INSERT INTO `seckill_product` VALUES (9108, 27, 1000, 100, 704);
+INSERT INTO `seckill_product` VALUES (9109, 29, 1000, 100, 704);
+INSERT INTO `seckill_product` VALUES (9110, 30, 1000, 100, 704);
+INSERT INTO `seckill_product` VALUES (9111, 31, 1000, 100, 704);
+INSERT INTO `seckill_product` VALUES (9112, 35, 1000, 100, 705);
+INSERT INTO `seckill_product` VALUES (9113, 5, 1000, 100, 705);
+INSERT INTO `seckill_product` VALUES (9114, 6, 1000, 100, 705);
+INSERT INTO `seckill_product` VALUES (9115, 7, 1000, 100, 705);
+INSERT INTO `seckill_product` VALUES (9116, 10, 1000, 100, 705);
+INSERT INTO `seckill_product` VALUES (9117, 13, 1000, 100, 705);
+INSERT INTO `seckill_product` VALUES (9118, 14, 1000, 100, 705);
+INSERT INTO `seckill_product` VALUES (9119, 16, 1000, 100, 705);
+INSERT INTO `seckill_product` VALUES (9120, 18, 1000, 100, 705);
+INSERT INTO `seckill_product` VALUES (9121, 19, 1000, 100, 705);
+INSERT INTO `seckill_product` VALUES (9122, 20, 1000, 100, 705);
+INSERT INTO `seckill_product` VALUES (9123, 23, 1000, 100, 705);
+INSERT INTO `seckill_product` VALUES (9124, 25, 1000, 100, 705);
+INSERT INTO `seckill_product` VALUES (9125, 26, 1000, 100, 705);
+INSERT INTO `seckill_product` VALUES (9126, 29, 1000, 100, 705);
+
+-- ----------------------------
+-- Table structure for seckill_time
+-- ----------------------------
+DROP TABLE IF EXISTS `seckill_time`;
+CREATE TABLE `seckill_time`  (
+    `time_id` int(11) NOT NULL AUTO_INCREMENT,
+    `start_time` bigint(20) DEFAULT NULL,
+    `end_time` bigint(20) DEFAULT NULL,
+    PRIMARY KEY (`time_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 706 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of seckill_time
+-- ----------------------------
+INSERT INTO `seckill_time` VALUES (694, 1591603200000, 1591606800000);
+INSERT INTO `seckill_time` VALUES (695, 1591610400000, 1591614000000);
+INSERT INTO `seckill_time` VALUES (696, 1591617600000, 1591621200000);
+INSERT INTO `seckill_time` VALUES (697, 1591624800000, 1591628400000);
+INSERT INTO `seckill_time` VALUES (698, 1591632000000, 1591635600000);
+INSERT INTO `seckill_time` VALUES (699, 1591639200000, 1591642800000);
+INSERT INTO `seckill_time` VALUES (700, 1591646400000, 1591650000000);
+INSERT INTO `seckill_time` VALUES (701, 1591653600000, 1591657200000);
+INSERT INTO `seckill_time` VALUES (702, 1591660800000, 1591664400000);
+INSERT INTO `seckill_time` VALUES (703, 1591668000000, 1591671600000);
+INSERT INTO `seckill_time` VALUES (704, 1591675200000, 1591678800000);
+INSERT INTO `seckill_time` VALUES (705, 1591682400000, 1591686000000);
+
+-- ----------------------------
+-- Table structure for order
+-- ----------------------------
+DROP TABLE IF EXISTS `order`;
+CREATE TABLE `order`  (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `order_id` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+    `user_id` int(11) NOT NULL,
+    `product_id` int(11) NOT NULL,
+    `product_num` int(11) NOT NULL,
+    `product_price` double NOT NULL,
+    `order_time` bigint(20) NOT NULL,
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of order
+-- ----------------------------
+INSERT INTO `order` VALUES (11, '1253562115243917312', 1, 3, 1, 2599, 1587707472989);
+INSERT INTO `order` VALUES (12, '1253562575002550272', 1, 3, 1, 2599, 1587707582604);
+

@@ -1,6 +1,5 @@
 package com.qyl.mall.utils;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**

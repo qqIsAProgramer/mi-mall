@@ -21,6 +21,11 @@ public enum ExceptionEnum {
     PICTURE_NOT_FOUND(0, "商品图片为空"),
 
     CART_NUM_UPPER(0, "该商品购物车达到上限"),
+
+    SECKILL_NOT_FOUND(0, "尚无秒杀商品"),
+    SECKILL_IS_OVER(0, "秒杀商品售罄"),
+    SECKILL_NOT_START(0, "秒杀尚未开始"),
+    SECKILL_IS_REUSE(0, "秒杀"),
     ;
 
     /**

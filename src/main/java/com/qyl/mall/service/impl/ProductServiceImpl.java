@@ -7,7 +7,7 @@ import com.qyl.mall.exception.MyException;
 import com.qyl.mall.mapper.ProductMapper;
 import com.qyl.mall.pojo.Product;
 import com.qyl.mall.service.ProductService;
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 

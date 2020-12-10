@@ -5,7 +5,7 @@ import com.qyl.mall.exception.MyException;
 import com.qyl.mall.mapper.ProductPictureMapper;
 import com.qyl.mall.pojo.ProductPicture;
 import com.qyl.mall.service.ProductPictureService;
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
