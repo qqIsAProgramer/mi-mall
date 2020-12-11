@@ -13,7 +13,6 @@ import com.qyl.mall.utils.RedisKey;
 import com.qyl.mall.vo.SeckillProductVO;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -136,6 +135,7 @@ public class SeckillProductServiceImpl implements SeckillProductService {
     }
 
     @Override
+    @Transactional
     public void seckillProduct(Integer seckillId, Integer userId) {
         if (localOverMap.get(seckillId) != null && !localOverMap.get(seckillId)) {
             throw new MyException(ExceptionEnum.SECKILL_IS_OVER);

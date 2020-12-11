@@ -40,9 +40,10 @@ public class UserServiceImpl implements UserService {
     public User login(User user) {
         // 将用户密码加密与数据库中的进行对比
         user.setPassword(MD5Util.MD5Encode(user.getPassword()));
-        if (userMapper.selectOne(user) == null) {
+        User one = userMapper.selectOne(user);
+        if (one == null) {
             throw new MyException(ExceptionEnum.USER_NOT_FOUND);
         }
-        return user;
+        return one;
     }
 }

@@ -26,6 +26,8 @@ public enum ExceptionEnum {
     SECKILL_IS_OVER(0, "秒杀商品售罄"),
     SECKILL_NOT_START(0, "秒杀尚未开始"),
     SECKILL_IS_REUSE(0, "秒杀"),
+
+    ORDER_NOT_FOUND(0, "订单查询为空"),
     ;
 
     /**

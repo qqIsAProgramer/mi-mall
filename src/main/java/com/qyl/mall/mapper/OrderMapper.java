@@ -14,8 +14,8 @@ import java.util.List;
 @org.apache.ibatis.annotations.Mapper
 public interface OrderMapper extends Mapper<Order> {
 
-    @Select("select order.*, product.product_name, product.product_picture " +
-            "from order, product " +
-            "where order.product_id = product.product_id and order.user_id = #{userId}")
+    @Select("select `order`.*, product.product_name, product.product_picture " +
+            "from `order`, product " +
+            "where `order`.product_id = product.product_id and `order`.user_id = #{userId}")
     List<OrderVO> getOrderVOByUserId(Integer userId);
 }
