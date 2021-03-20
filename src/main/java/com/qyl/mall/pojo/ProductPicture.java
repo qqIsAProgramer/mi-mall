@@ -17,7 +17,7 @@ public class ProductPicture {
      * 商品图片ID
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "JDBC")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     /**

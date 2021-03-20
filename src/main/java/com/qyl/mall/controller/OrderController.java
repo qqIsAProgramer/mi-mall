@@ -1,17 +1,17 @@
 package com.qyl.mall.controller;
 
-import com.qyl.mall.Enums.ResponseEnum;
 import com.qyl.mall.service.OrderService;
-import com.qyl.mall.utils.ResultMessage;
+import com.qyl.mall.utils.ResponseEntity;
+import com.qyl.mall.utils.component.RedisUtil;
 import com.qyl.mall.vo.CartVO;
 import com.qyl.mall.vo.OrderVO;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 /**
+ * 订单相关接口
  * @Author: qyl
  * @Date: 2020/12/11 9:25
  */
@@ -21,22 +21,29 @@ public class OrderController {
 
     @Resource
     private OrderService orderService;
-    @Resource
-    private RedisTemplate redisTemplate;
 
+    /**
+     * 添加订单
+     * @param cartVOList
+     * @param token
+     * @return
+     */
     @PostMapping("/add")
-    public ResultMessage addOrder(@RequestBody List<CartVO> cartVOList, @CookieValue("USER_TOKEN") String cookie) {
-        // 判断cookie是否存在
-        Integer userId = (Integer) redisTemplate.opsForHash().get(cookie, "userId");
-        orderService.addOrder(cartVOList, userId);
-        return ResultMessage.success(ResponseEnum.SUCCESS.getCode(), ResponseEnum.SUCCESS.getMsg());
+    public ResponseEntity<Void> addOrder(@RequestBody List<CartVO> cartVOList, @CookieValue("USER_TOKEN") String token) {
+        // 判断 cookie 是否存在
+        Integer userId = (Integer) RedisUtil.getValue(token, "userId");
+        return orderService.addOrder(cartVOList, userId);
     }
 
+    /**
+     * 获取用户订单列表
+     * @param token
+     * @return
+     */
     @GetMapping("/get")
-    public ResultMessage getOrder(@CookieValue("USER_TOKEN") String cookie) {
-        // 判断cookie是否存在
-        Integer userId = (Integer) redisTemplate.opsForHash().get(cookie, "userId");
-        List<List<OrderVO>> list = orderService.getOrder(userId);
-        return ResultMessage.success(ResponseEnum.SUCCESS.getCode(), ResponseEnum.SUCCESS.getMsg(), list);
+    public ResponseEntity<List<List<OrderVO>>> getOrder(@CookieValue("USER_TOKEN") String token) {
+        // 判断 cookie 是否存在
+        Integer userId = (Integer) RedisUtil.getValue(token, "userId");
+        return orderService.getOrder(userId);
     }
 }

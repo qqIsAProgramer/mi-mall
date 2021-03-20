@@ -1,5 +1,6 @@
 package com.qyl.mall.service;
 
+import com.qyl.mall.utils.ResponseEntity;
 import com.qyl.mall.vo.CartVO;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public interface ShoppingCartService {
      * @param userId
      * @return
      */
-    List<CartVO> getCartByUserId(Integer userId);
+    ResponseEntity<List<CartVO>> getCartByUserId(Integer userId);
 
     /**
      * 添加购物车
@@ -23,7 +24,7 @@ public interface ShoppingCartService {
      * @param userId
      * @return
      */
-    CartVO addCart(Integer productId, Integer userId);
+    ResponseEntity<Void> addCart(Integer productId, Integer userId);
 
     /**
      * 更新购物车商品的数量
@@ -31,12 +32,12 @@ public interface ShoppingCartService {
      * @param userId
      * @param num
      */
-    void UpdateCartNum(Integer cartId, Integer userId, Integer num);
+    ResponseEntity<Void> updateCartNum(Integer cartId, Integer userId, Integer num);
 
     /**
      * 从购物车中移除
      * @param cartId
      * @param userId
      */
-    void deleteCart(Integer cartId, Integer userId);
+    ResponseEntity<Void> deleteCart(Integer cartId, Integer userId);
 }

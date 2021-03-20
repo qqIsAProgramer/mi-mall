@@ -1,9 +1,10 @@
 package com.qyl.mall.service;
 
-import com.github.pagehelper.PageInfo;
 import com.qyl.mall.pojo.Product;
+import com.qyl.mall.utils.ResponseEntity;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: qyl
@@ -16,20 +17,13 @@ public interface ProductService {
      * @param categoryId
      * @return
      */
-    List<Product> getProductByCategoryId(Integer categoryId);
+    ResponseEntity<List<Product>> getProductByCategoryId(Integer categoryId);
 
     /**
      * 获取热门商品
      * @return
      */
-    List<Product> getHotProduct();
-
-    /**
-     * 通过商品ID获取商品
-     * @param productId
-     * @return
-     */
-    Product getProductById(Integer productId);
+    ResponseEntity<List<Product>> getHotProduct();
 
     /**
      * 商品分页展示
@@ -38,5 +32,5 @@ public interface ProductService {
      * @param categoryId
      * @return
      */
-    PageInfo<Product> getProductByPage(Integer currentPage, Integer pageSize, Integer categoryId);
+    ResponseEntity<Map<String, Object>> getProductByPage(Integer currentPage, Integer pageSize, Integer categoryId);
 }

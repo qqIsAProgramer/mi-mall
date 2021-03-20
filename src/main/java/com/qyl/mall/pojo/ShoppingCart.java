@@ -17,7 +17,7 @@ public class ShoppingCart {
      * 购物车ID
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "JDBC")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     /**

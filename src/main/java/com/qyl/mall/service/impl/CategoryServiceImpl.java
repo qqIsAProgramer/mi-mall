@@ -1,10 +1,10 @@
 package com.qyl.mall.service.impl;
 
-import com.qyl.mall.Enums.ExceptionEnum;
-import com.qyl.mall.exception.MyException;
+import com.qyl.mall.enums.ResponseEnum;
 import com.qyl.mall.mapper.CategoryMapper;
 import com.qyl.mall.pojo.Category;
 import com.qyl.mall.service.CategoryService;
+import com.qyl.mall.utils.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -21,11 +21,11 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryMapper categoryMapper;
 
     @Override
-    public List<Category> getAll() {
-        List<Category> categories = categoryMapper.selectAll();
-        if (categories == null) {
-            throw new MyException(ExceptionEnum.CATEGORY_NOT_FOUND);
+    public ResponseEntity<List<Category>> getAll() {
+        List<Category> categoryList = categoryMapper.selectAll();
+        if (categoryList == null) {
+            return ResponseEntity.error(ResponseEnum.CATEGORY_NOT_FOUND.getCode(), ResponseEnum.CATEGORY_NOT_FOUND.getMsg());
         }
-        return categories;
+        return ResponseEntity.ok(categoryList);
     }
 }

@@ -1,6 +1,7 @@
 package com.qyl.mall.service;
 
 import com.qyl.mall.pojo.Category;
+import com.qyl.mall.utils.ResponseEntity;
 
 import java.util.List;
 
@@ -14,5 +15,5 @@ public interface CategoryService {
      * 获取所有分类
      * @return
      */
-    List<Category> getAll();
+    ResponseEntity<List<Category>> getAll();
 }

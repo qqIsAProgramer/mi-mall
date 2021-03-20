@@ -17,7 +17,7 @@ public class Order {
      * 订单在数据库中的ID
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "JDBC")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     /**

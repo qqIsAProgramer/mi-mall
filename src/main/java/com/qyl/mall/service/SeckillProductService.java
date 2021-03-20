@@ -2,6 +2,7 @@ package com.qyl.mall.service;
 
 import com.qyl.mall.pojo.SeckillProduct;
 import com.qyl.mall.pojo.SeckillTime;
+import com.qyl.mall.utils.ResponseEntity;
 import com.qyl.mall.vo.SeckillProductVO;
 
 import java.util.List;
@@ -17,31 +18,38 @@ public interface SeckillProductService {
      * @param timeId
      * @return
      */
-    List<SeckillProductVO> getProduct(Integer timeId);
+    ResponseEntity<List<SeckillProductVO>> getSeckillProductByTime(Integer timeId);
 
     /**
      * 添加秒杀商品
      * @param seckillProduct
      */
-    void addSeckillProduct(SeckillProduct seckillProduct);
+    ResponseEntity<Void> addSeckillProduct(SeckillProduct seckillProduct);
 
     /**
      * 获取秒杀时间列表
      * @return
      */
-    List<SeckillTime> getTime();
+    ResponseEntity<List<SeckillTime>> getSeckillTime();
 
     /**
      * 获取单个秒杀商品
      * @param seckillId
      * @return
      */
-    SeckillProductVO getSeckill(Integer seckillId);
+    ResponseEntity<SeckillProductVO> getSeckillProductById(Integer seckillId);
 
     /**
      * 秒杀商品
      * @param seckillId
      * @param userId
      */
-    void seckillProduct(Integer seckillId, Integer userId);
+    ResponseEntity<Void> doSeckillProduct(Integer seckillId, Integer userId);
+
+    /**
+     * 获取秒杀结束时间
+     * @param seckillId
+     * @return
+     */
+    Long getEndTime(Integer seckillId);
 }

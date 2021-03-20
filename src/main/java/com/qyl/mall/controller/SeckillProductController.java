@@ -1,18 +1,18 @@
 package com.qyl.mall.controller;
 
-import com.qyl.mall.Enums.ResponseEnum;
 import com.qyl.mall.pojo.SeckillProduct;
 import com.qyl.mall.pojo.SeckillTime;
 import com.qyl.mall.service.SeckillProductService;
-import com.qyl.mall.utils.ResultMessage;
+import com.qyl.mall.utils.ResponseEntity;
+import com.qyl.mall.utils.component.RedisUtil;
 import com.qyl.mall.vo.SeckillProductVO;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 /**
+ * 商品秒杀相关接口
  * @Author: qyl
  * @Date: 2020/12/10 10:52
  */
@@ -22,18 +22,15 @@ public class SeckillProductController {
 
     @Resource
     private SeckillProductService seckillProductService;
-    @Resource
-    private RedisTemplate redisTemplate;
 
     /**
-     * 通过时间ID来获取对应秒杀商品列表
+     * 通过时间 ID 来获取对应秒杀商品列表
      * @param timeId
      * @return
      */
-    @GetMapping("/time/{timeId}")
-    public ResultMessage getProduct(@PathVariable Integer timeId) {
-        List<SeckillProductVO> seckillProductVOList = seckillProductService.getProduct(timeId);
-        return ResultMessage.success(ResponseEnum.SUCCESS.getCode(), ResponseEnum.SUCCESS.getMsg(), seckillProductVOList);
+    @GetMapping("/timeId")
+    public ResponseEntity<List<SeckillProductVO>> getSeckillProductByTime(Integer timeId) {
+        return seckillProductService.getSeckillProductByTime(timeId);
     }
 
     /**
@@ -41,10 +38,9 @@ public class SeckillProductController {
      * @param seckillId
      * @return
      */
-    @GetMapping("/{seckillId}")
-    public ResultMessage getSeckill(@PathVariable Integer seckillId) {
-        SeckillProductVO seckillProductVO = seckillProductService.getSeckill(seckillId);
-        return ResultMessage.success(ResponseEnum.SUCCESS.getCode(), ResponseEnum.SUCCESS.getMsg(), seckillProductVO);
+    @GetMapping("/seckillId")
+    public ResponseEntity<SeckillProductVO> getSeckillProductById(Integer seckillId) {
+        return seckillProductService.getSeckillProductById(seckillId);
     }
 
     /**
@@ -52,9 +48,8 @@ public class SeckillProductController {
      * @return
      */
     @GetMapping("/time")
-    public ResultMessage getTime() {
-        List<SeckillTime> seckillTimeList = seckillProductService.getTime();
-        return ResultMessage.success(ResponseEnum.SUCCESS.getCode(), ResponseEnum.SUCCESS.getMsg(), seckillTimeList);
+    public ResponseEntity<List<SeckillTime>> getSeckillTime() {
+        return seckillProductService.getSeckillTime();
     }
 
     /**
@@ -63,16 +58,20 @@ public class SeckillProductController {
      * @return
      */
     @PostMapping("/add")
-    public ResultMessage addSeckillProduct(SeckillProduct seckillProduct) {
-        seckillProductService.addSeckillProduct(seckillProduct);
-        return ResultMessage.success(ResponseEnum.SUCCESS.getCode(), ResponseEnum.SUCCESS.getMsg());
+    public ResponseEntity<Void> addSeckillProduct(SeckillProduct seckillProduct) {
+       return seckillProductService.addSeckillProduct(seckillProduct);
     }
 
-    @PostMapping("/product")
-    public ResultMessage seckillProduct(Integer seckillId, @CookieValue("USER_TOKEN") String cookie) {
-        // 先判断cookie是否还存在
-        Integer userId = (Integer) redisTemplate.opsForHash().get(cookie, "userId");
-        seckillProductService.seckillProduct(seckillId, userId);
-        return ResultMessage.success(ResponseEnum.SUCCESS.getCode(), ResponseEnum.SUCCESS.getMsg());
+    /**
+     * 秒杀商品
+     * @param seckillId
+     * @param token
+     * @return
+     */
+    @PostMapping("/do")
+    public ResponseEntity<Void> doSeckillProduct(Integer seckillId, @CookieValue("USER_TOKEN") String token) {
+        // 先判断 cookie 是否还存在
+        Integer userId = (Integer) RedisUtil.getValue(token, "userId");
+        return seckillProductService.doSeckillProduct(seckillId, userId);
     }
 }

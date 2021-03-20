@@ -1,15 +1,19 @@
 package com.qyl.mall.service.impl;
 
-import com.qyl.mall.Enums.ExceptionEnum;
-import com.qyl.mall.exception.MyException;
+import com.qyl.mall.enums.ResponseEnum;
 import com.qyl.mall.mapper.OrderMapper;
 import com.qyl.mall.mapper.ProductMapper;
+import com.qyl.mall.mapper.SeckillProductMapper;
 import com.qyl.mall.mapper.ShoppingCartMapper;
 import com.qyl.mall.pojo.Order;
 import com.qyl.mall.pojo.Product;
+import com.qyl.mall.pojo.SeckillProduct;
 import com.qyl.mall.pojo.ShoppingCart;
 import com.qyl.mall.service.OrderService;
-import com.qyl.mall.utils.IdWorker;
+import com.qyl.mall.utils.ResponseEntity;
+import com.qyl.mall.utils.component.IdWorker;
+import com.qyl.mall.utils.component.RedisKey;
+import com.qyl.mall.utils.component.RedisUtil;
 import com.qyl.mall.vo.CartVO;
 import com.qyl.mall.vo.OrderVO;
 import org.apache.commons.lang3.ArrayUtils;
@@ -29,19 +33,25 @@ public class OrderServiceImpl implements OrderService {
 
     @Resource
     private OrderMapper orderMapper;
+
     @Resource
     private IdWorker idWorker;
+
     @Resource
     private ProductMapper productMapper;
+
     @Resource
     private ShoppingCartMapper shoppingCartMapper;
 
+    @Resource
+    private SeckillProductMapper seckillProductMapper;
+
     @Override
     @Transactional
-    public void addOrder(List<CartVO> cartVOList, Integer userId) {
-        // 先添加订单
-        String orderId = idWorker.nextId() + "";    // 订单ID
-        long time = new Date().getTime();   // 订单生成时间
+    public ResponseEntity<Void> addOrder(List<CartVO> cartVOList, Integer userId) {
+        // 添加订单
+        String orderId = idWorker.nextId() + "";  // 订单ID
+        long time = new Date().getTime();  // 订单生成时间
         for (CartVO cartVO : cartVOList) {
             Order order = new Order();
             order.setOrderId(orderId);
@@ -63,17 +73,48 @@ public class OrderServiceImpl implements OrderService {
         ShoppingCart shoppingCart = new ShoppingCart();
         shoppingCart.setUserId(userId);
         shoppingCartMapper.delete(shoppingCart);
+
+        return ResponseEntity.ok();
     }
 
     @Override
-    public List<List<OrderVO>> getOrder(Integer userId) {
+    public ResponseEntity<List<List<OrderVO>>> getOrder(Integer userId) {
         List<OrderVO> orderVOList = orderMapper.getOrderVOByUserId(userId);
         if (ArrayUtils.isEmpty(orderVOList.toArray())) {
-            throw new MyException(ExceptionEnum.ORDER_NOT_FOUND);
+            return ResponseEntity.error(ResponseEnum.ORDER_NOT_FOUND.getCode(), ResponseEnum.ORDER_NOT_FOUND.getMsg());
         }
         // 将同一个订单放在一组
-        Map<String, List<OrderVO>> collect = orderVOList.stream().collect(Collectors.groupingBy(Order::getOrderId));
-        Collection<List<OrderVO>> values = collect.values();
-        return new ArrayList<>(values);
+        Collection<List<OrderVO>> values = orderVOList.stream().collect(Collectors.groupingBy(Order::getOrderId)).values();
+        return ResponseEntity.ok(new ArrayList<>(values));
+    }
+
+    @Override
+    @Transactional
+    public void addSeckillOrder(Integer seckillId, Integer userId) {
+        // 订单ID
+        String orderId = idWorker.nextId() + "";
+        // 商品ID
+        SeckillProduct seckillProduct = new SeckillProduct();
+        seckillProduct.setSeckillId(seckillId);
+        SeckillProduct one = seckillProductMapper.selectOne(seckillProduct);
+        Integer productId = one.getProductId();
+        // 秒杀价格
+        Double seckillPrice = one.getSeckillPrice();
+
+        // 订单封装
+        Order order = new Order();
+        order.setOrderId(orderId);
+        order.setProductId(productId);
+        order.setProductPrice(seckillPrice);
+        order.setProductNum(1);
+        order.setUserId(userId);
+        order.setOrderTime(new Date().getTime());
+
+        orderMapper.insert(order);
+        // 减库存
+        seckillProductMapper.decrStock(seckillId);
+
+        // 订单创建成功，将用户写入 redis，防止多次抢购
+        RedisUtil.leftPush(RedisKey.SECKILL_PRODUCT_USER_LIST, userId);
     }
 }

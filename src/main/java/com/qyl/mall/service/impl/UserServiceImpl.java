@@ -1,11 +1,11 @@
 package com.qyl.mall.service.impl;
 
-import com.qyl.mall.Enums.ExceptionEnum;
-import com.qyl.mall.exception.MyException;
+import com.qyl.mall.enums.ResponseEnum;
 import com.qyl.mall.mapper.UserMapper;
 import com.qyl.mall.pojo.User;
 import com.qyl.mall.service.UserService;
-import com.qyl.mall.utils.MD5Util;
+import com.qyl.mall.utils.ResponseEntity;
+import com.qyl.mall.utils.component.EncryptUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -21,29 +21,26 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public void register(User user) {
+    public ResponseEntity<Void> register(User user) {
         User u = new User();
-        u.setUserPhoneNumber(user.getUserPhoneNumber());
+        u.setPhone(user.getPhone());
         // 查看手机号是否被注册
         if (userMapper.selectCount(u) > 0) {
             // 手机号已存在
-            throw new MyException(ExceptionEnum.SAVE_USER_REUSE);
+            return ResponseEntity.error(ResponseEnum.USER_EXIST.getCode(), ResponseEnum.USER_EXIST.getMsg());
         }
         // 密码加密
-        user.setPassword(MD5Util.MD5Encode(user.getPassword()));
+        user.setPassword(EncryptUtil.encryptByMD5(user.getPassword()));
 
         // 存入数据库
-        userMapper.insert(user);
+        userMapper.insertSelective(user);
+        return ResponseEntity.ok();
     }
 
     @Override
     public User login(User user) {
         // 将用户密码加密与数据库中的进行对比
-        user.setPassword(MD5Util.MD5Encode(user.getPassword()));
-        User one = userMapper.selectOne(user);
-        if (one == null) {
-            throw new MyException(ExceptionEnum.USER_NOT_FOUND);
-        }
-        return one;
+        user.setPassword(EncryptUtil.encryptByMD5(user.getPassword()));
+        return userMapper.selectOne(user);
     }
 }

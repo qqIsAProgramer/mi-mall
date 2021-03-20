@@ -11,10 +11,9 @@ import java.util.List;
  * @Author: qyl
  * @Date: 2020/12/7 15:02
  */
-@org.apache.ibatis.annotations.Mapper
 public interface SeckillTimeMapper extends Mapper<SeckillTime> {
 
-    @Select("select * from seckill_time where end_time > #{time} limit 6")
+    @Select("select * from seckill_time where end_time > #{time} limit 8")
     List<SeckillTime> getTime(long time);
 
     @Delete("delete from seckill_time")

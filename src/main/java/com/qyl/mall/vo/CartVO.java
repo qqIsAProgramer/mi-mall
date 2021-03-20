@@ -15,7 +15,7 @@ public class CartVO {
 
     private String productName;
 
-    private String productImg;
+    private String productPicture;
 
     private Double price;
 

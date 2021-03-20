@@ -1,8 +1,7 @@
 package com.qyl.mall.controller;
 
-import com.qyl.mall.Enums.ResponseEnum;
 import com.qyl.mall.service.ShoppingCartService;
-import com.qyl.mall.utils.ResultMessage;
+import com.qyl.mall.utils.ResponseEntity;
 import com.qyl.mall.vo.CartVO;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,6 +9,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
+ * 购物车相关接口
  * @Author: qyl
  * @Date: 2020/12/7 9:13
  */
@@ -25,10 +25,9 @@ public class ShoppingCartController {
      * @param userId
      * @return
      */
-    @GetMapping("/user/{userId}")
-    public ResultMessage getCartByUserId(@PathVariable Integer userId) {
-        List<CartVO> cartVOList = shoppingCartService.getCartByUserId(userId);
-        return ResultMessage.success(ResponseEnum.SUCCESS.getCode(), ResponseEnum.SUCCESS.getMsg(), cartVOList);
+    @GetMapping("/user")
+    public ResponseEntity<List<CartVO>> getCartByUserId(Integer userId) {
+        return shoppingCartService.getCartByUserId(userId);
     }
 
     /**
@@ -38,12 +37,8 @@ public class ShoppingCartController {
      * @return
      */
     @PostMapping("/add")
-    public ResultMessage addCart(Integer productId, Integer userId) {
-        CartVO cartVO = shoppingCartService.addCart(productId, userId);
-        if (cartVO != null) {
-            return ResultMessage.success(ResponseEnum.ADD_CART_SUCCESSFULLY.getCode(), ResponseEnum.ADD_CART_SUCCESSFULLY.getMsg(), cartVO);
-        }
-        return ResultMessage.success(ResponseEnum.CART_NUM_PLUS_ONE.getCode(), ResponseEnum.CART_NUM_PLUS_ONE.getMsg());
+    public ResponseEntity<Void> addCart(Integer productId, Integer userId) {
+        return shoppingCartService.addCart(productId, userId);
     }
 
     /**
@@ -54,9 +49,8 @@ public class ShoppingCartController {
      * @return
      */
     @PostMapping("/update/num")
-    public ResultMessage UpdateCartNum(Integer cartId, Integer userId, Integer num) {
-        shoppingCartService.UpdateCartNum(cartId, userId, num);
-        return ResultMessage.success(ResponseEnum.SUCCESS.getCode(), ResponseEnum.SUCCESS.getMsg());
+    public ResponseEntity<Void> updateCartNum(Integer cartId, Integer userId, Integer num) {
+        return shoppingCartService.updateCartNum(cartId, userId, num);
     }
 
     /**
@@ -66,8 +60,7 @@ public class ShoppingCartController {
      * @return
      */
     @PostMapping("/delete")
-    public ResultMessage deleteCart(Integer cartId, Integer userId) {
-        shoppingCartService.deleteCart(cartId, userId);
-        return ResultMessage.success(ResponseEnum.SUCCESS.getCode(), ResponseEnum.SUCCESS.getMsg());
+    public ResponseEntity<Void> deleteCart(Integer cartId, Integer userId) {
+        return shoppingCartService.deleteCart(cartId, userId);
     }
 }

@@ -1,4 +1,4 @@
-package com.qyl.mall.utils;
+package com.qyl.mall.utils.component;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -13,8 +13,8 @@ import java.nio.charset.StandardCharsets;
 public class CookieUtil {
 
     /**
-     * 设置cookie的值，并使其在指定时间内生效
-     * @param cookieMaxAge cookie生效的最大秒数
+     * 设置 cookie 的值，并使其在指定时间内生效
+     * @param cookieMaxAge cookie 生效的最大秒数
      */
     public static void setCookie(HttpServletRequest request, HttpServletResponse response, String cookieName, String cookieValue, Integer cookieMaxAge) {
         if (cookieValue == null) {
@@ -28,19 +28,20 @@ public class CookieUtil {
             cookie.setMaxAge(cookieMaxAge);
         }
         if (request != null) {
-            cookie.setDomain(getDomainName(request));
+            cookie.setDomain(getDomainName(request, response));
         }
         cookie.setPath("/");
         response.addCookie(cookie);
     }
 
     /**
-     * 得到cookie的域名
+     * 得到 cookie 的域名
      */
-    private static final String getDomainName(HttpServletRequest request) {
+    private static String getDomainName(HttpServletRequest request, HttpServletResponse response) {
         String domainName;
 
         String serverName = request.getRequestURL().toString();
+        System.out.println(serverName);
         if (serverName.equals("")) {
             domainName = "";
         } else {
@@ -65,13 +66,14 @@ public class CookieUtil {
             String[] ary = domainName.split(":");
             domainName = ary[0];
         }
+        System.out.println(domainName);
         return domainName;
     }
 
     /**
-     * 删除Cookie
+     * 删除 Cookie
      */
-    public static void delCookie(HttpServletRequest request, String cookieName) {
+    public static void delCookie(HttpServletRequest request, HttpServletResponse response, String cookieName) {
         // 获得cookie数组
         Cookie[] cookies = request.getCookies();
         for (Cookie cookie : cookies) {

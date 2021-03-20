@@ -2,17 +2,19 @@ package com.qyl.mall.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.qyl.mall.Enums.ExceptionEnum;
-import com.qyl.mall.exception.MyException;
+import com.qyl.mall.enums.ResponseEnum;
 import com.qyl.mall.mapper.ProductMapper;
 import com.qyl.mall.pojo.Product;
 import com.qyl.mall.service.ProductService;
+import com.qyl.mall.utils.ResponseEntity;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: qyl
@@ -25,7 +27,7 @@ public class ProductServiceImpl implements ProductService {
     private ProductMapper productMapper;
 
     @Override
-    public List<Product> getProductByCategoryId(Integer categoryId) {
+    public ResponseEntity<List<Product>> getProductByCategoryId(Integer categoryId) {
         // 设置模板
         Example example = new Example(Product.class);
         example.orderBy("productSales").desc();
@@ -34,35 +36,26 @@ public class ProductServiceImpl implements ProductService {
 
         List<Product> productList = productMapper.selectByExample(example);
         if (ArrayUtils.isEmpty(productList.toArray())) {
-            throw new MyException(ExceptionEnum.PRODUCT_NOT_FOUND);
+            return ResponseEntity.error(ResponseEnum.PRODUCT_NOT_FOUND.getCode(), ResponseEnum.PRODUCT_NOT_FOUND.getMsg());
         }
-        return productList;
+        return ResponseEntity.ok(productList);
     }
 
     @Override
-    public List<Product> getHotProduct() {
+    public ResponseEntity<List<Product>> getHotProduct() {
         Example example = new Example(Product.class);
         example.orderBy("productSales").desc();
         PageHelper.startPage(0, 8);
 
         List<Product> productList = productMapper.selectByExample(example);
         if (ArrayUtils.isEmpty(productList.toArray())) {
-            throw new MyException(ExceptionEnum.PRODUCT_NOT_FOUND);
+            return ResponseEntity.error(ResponseEnum.PRODUCT_NOT_FOUND.getCode(), ResponseEnum.PRODUCT_NOT_FOUND.getMsg());
         }
-        return productList;
+        return ResponseEntity.ok(productList);
     }
 
     @Override
-    public Product getProductById(Integer productId) {
-        Product product = productMapper.selectByPrimaryKey(productId);
-        if (product == null) {
-            throw new MyException(ExceptionEnum.PRODUCT_NOT_FOUND);
-        }
-        return product;
-    }
-
-    @Override
-    public PageInfo<Product> getProductByPage(Integer currentPage, Integer pageSize, Integer categoryId) {
+    public ResponseEntity<Map<String, Object>> getProductByPage(Integer currentPage, Integer pageSize, Integer categoryId) {
         List<Product> productList;
         PageHelper.startPage(currentPage - 1, pageSize, true);
 
@@ -75,6 +68,11 @@ public class ProductServiceImpl implements ProductService {
             product.setCategoryId(categoryId);
             productList = productMapper.select(product);
         }
-        return new PageInfo<>(productList);
+        PageInfo<Product> pageInfo = new PageInfo<>(productList);
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("product", pageInfo.getList());
+        data.put("total", pageInfo.getTotal());
+        return ResponseEntity.ok(data);
     }
 }

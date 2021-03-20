@@ -17,7 +17,7 @@ public class User {
      * 用户ID
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "JDBC")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
 
     /**
@@ -33,5 +33,5 @@ public class User {
     /**
      * 用户手机号
      */
-    private String userPhoneNumber;
+    private String phone;
 }

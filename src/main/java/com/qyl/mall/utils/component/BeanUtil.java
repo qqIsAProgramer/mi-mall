@@ -1,11 +1,8 @@
-package com.qyl.mall.utils;
+package com.qyl.mall.utils.component;
 
-import java.awt.image.Kernel;
 import java.beans.BeanInfo;
-import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,7 +13,7 @@ import java.util.Map;
 public class BeanUtil {
 
     /**
-     * 将javaBean对象封装到Map集合中
+     * 将 javaBean 对象封装到 Map 集合中
      * @param bean
      * @return
      */
@@ -35,6 +32,14 @@ public class BeanUtil {
         return map;
     }
 
+    /**
+     * 将 map 转化为 javaBean 对象
+     * @param map
+     * @param cls
+     * @param <T>
+     * @return
+     * @throws Exception
+     */
     public static <T> T map2bean(Map<String, Object> map, Class<T> cls) throws Exception {
         // 采用反射动态创建对象
         T obj = cls.getDeclaredConstructor().newInstance();
@@ -45,7 +50,7 @@ public class BeanUtil {
         for (PropertyDescriptor pd : propertyDescriptors) {
             String key = pd.getName();  // 获取属性名
             Object value = map.get(key);  // 获取属性值
-            pd.getWriteMethod().invoke(obj, value);  // 调用属性setter()方法，设置到JavaBean对象中
+            pd.getWriteMethod().invoke(obj, value);  // 调用属性setter()方法，设置到javaBean对象中
         }
         return obj;
     }

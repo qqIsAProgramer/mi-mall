@@ -17,7 +17,7 @@ public class Category {
      * 分类ID
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "JDBC")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer categoryId;
 
     /**

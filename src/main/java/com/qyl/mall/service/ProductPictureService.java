@@ -1,6 +1,7 @@
 package com.qyl.mall.service;
 
 import com.qyl.mall.pojo.ProductPicture;
+import com.qyl.mall.utils.ResponseEntity;
 
 import java.util.List;
 
@@ -15,5 +16,5 @@ public interface ProductPictureService {
      * @param productId
      * @return
      */
-    List<ProductPicture> getProductPictureByProductId(Integer productId);
+    ResponseEntity<List<ProductPicture>> getProductPictureById(Integer productId);
 }

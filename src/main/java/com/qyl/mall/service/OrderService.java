@@ -1,5 +1,6 @@
 package com.qyl.mall.service;
 
+import com.qyl.mall.utils.ResponseEntity;
 import com.qyl.mall.vo.CartVO;
 import com.qyl.mall.vo.OrderVO;
 
@@ -16,12 +17,19 @@ public interface OrderService {
      * @param cartVOList
      * @param userId
      */
-    void addOrder(List<CartVO> cartVOList, Integer userId);
+    ResponseEntity<Void> addOrder(List<CartVO> cartVOList, Integer userId);
 
     /**
      * 查看订单列表
      * @param userId
      * @return
      */
-    List<List<OrderVO>> getOrder(Integer userId);
+    ResponseEntity<List<List<OrderVO>>> getOrder(Integer userId);
+
+    /**
+     * 添加秒杀订单
+     * @param seckillId
+     * @param userId
+     */
+    void addSeckillOrder(Integer seckillId, Integer userId);
 }

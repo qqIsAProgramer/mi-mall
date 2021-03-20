@@ -6,9 +6,9 @@ CREATE TABLE `user`  (
      `user_id` int(11) NOT NULL AUTO_INCREMENT,
      `username` char(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
      `password` char(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-     `user_phone_number` char(11) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+     `phone` char(11) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
      PRIMARY KEY (`user_id`) USING BTREE,
-     UNIQUE INDEX `username`(`username`) USING BTREE
+     UNIQUE INDEX `phone`(`phone`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------

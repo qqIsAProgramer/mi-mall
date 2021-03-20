@@ -1,4 +1,4 @@
-package com.qyl.mall.utils;
+package com.qyl.mall.utils.component;
 
 import java.lang.management.ManagementFactory;
 import java.net.InetAddress;
@@ -30,9 +30,9 @@ public class IdWorker {
     // 数据中心标识位数
     private final static long datacenterIdBits = 5L;
     // 机器ID最大值
-    private final static long maxWorkerId = ~(-1L << workerIdBits);
+    private final static long maxWorkerId = -1L ^ (-1L << workerIdBits);
     // 数据中心ID最大值
-    private final static long maxDatacenterId = ~(-1L << datacenterIdBits);
+    private final static long maxDatacenterId = -1L ^ (-1L << datacenterIdBits);
     // 毫秒内自增位
     private final static long sequenceBits = 12L;
     // 机器ID偏左移12位
@@ -42,7 +42,7 @@ public class IdWorker {
     // 时间毫秒左移22位
     private final static long timestampLeftShift = sequenceBits + workerIdBits + datacenterIdBits;
 
-    private final static long sequenceMask = ~(-1L << sequenceBits);
+    private final static long sequenceMask = -1L ^ (-1L << sequenceBits);
     /* 上次生产id时间戳 */
     private static long lastTimestamp = -1L;
     // 0，并发控制
@@ -56,10 +56,11 @@ public class IdWorker {
         this.datacenterId = getDatacenterId(maxDatacenterId);
         this.workerId = getMaxWorkerId(datacenterId, maxWorkerId);
     }
-
     /**
-     * @param workerId 工作机器ID
-     * @param datacenterId 序列号
+     * @param workerId
+     *            工作机器ID
+     * @param datacenterId
+     *            序列号
      */
     public IdWorker(long workerId, long datacenterId) {
         if (workerId > maxWorkerId || workerId < 0) {
@@ -71,15 +72,15 @@ public class IdWorker {
         this.workerId = workerId;
         this.datacenterId = datacenterId;
     }
-
     /**
      * 获取下一个ID
+     *
      * @return
      */
     public synchronized long nextId() {
         long timestamp = timeGen();
         if (timestamp < lastTimestamp) {
-            throw new RuntimeException(String.format("Clock moved backwards. Refusing to generate id for %d milliseconds", lastTimestamp - timestamp));
+            throw new RuntimeException(String.format("Clock moved backwards.  Refusing to generate id for %d milliseconds", lastTimestamp - timestamp));
         }
 
         if (lastTimestamp == timestamp) {
@@ -114,26 +115,30 @@ public class IdWorker {
     }
 
     /**
+     * <p>
      * 获取 maxWorkerId
+     * </p>
      */
     protected static long getMaxWorkerId(long datacenterId, long maxWorkerId) {
         StringBuffer mpid = new StringBuffer();
         mpid.append(datacenterId);
         String name = ManagementFactory.getRuntimeMXBean().getName();
         if (!name.isEmpty()) {
-         /*
-          * GET jvmPid
-          */
+            /*
+             * GET jvmPid
+             */
             mpid.append(name.split("@")[0]);
         }
-      /*
-       * MAC + PID 的 hashcode 获取16个低位
-       */
+        /*
+         * MAC + PID 的 hashcode 获取16个低位
+         */
         return (mpid.toString().hashCode() & 0xffff) % (maxWorkerId + 1);
     }
 
     /**
+     * <p>
      * 数据标识id部分
+     * </p>
      */
     protected static long getDatacenterId(long maxDatacenterId) {
         long id = 0L;
@@ -149,7 +154,7 @@ public class IdWorker {
                 id = id % (maxDatacenterId + 1);
             }
         } catch (Exception e) {
-            System.out.println("getDatacenterId: " + e.getMessage());
+            System.out.println(" getDatacenterId: " + e.getMessage());
         }
         return id;
     }

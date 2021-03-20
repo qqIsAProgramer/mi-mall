@@ -1,10 +1,10 @@
 package com.qyl.mall.service.impl;
 
-import com.qyl.mall.Enums.ExceptionEnum;
-import com.qyl.mall.exception.MyException;
+import com.qyl.mall.enums.ResponseEnum;
 import com.qyl.mall.mapper.ProductPictureMapper;
 import com.qyl.mall.pojo.ProductPicture;
 import com.qyl.mall.service.ProductPictureService;
+import com.qyl.mall.utils.ResponseEntity;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.stereotype.Service;
 
@@ -22,13 +22,14 @@ public class ProductPictureServiceImpl implements ProductPictureService {
     private ProductPictureMapper productPictureMapper;
 
     @Override
-    public List<ProductPicture> getProductPictureByProductId(Integer productId) {
+    public ResponseEntity<List<ProductPicture>> getProductPictureById(Integer productId) {
         ProductPicture productPicture = new ProductPicture();
         productPicture.setProductId(productId);
         List<ProductPicture> productPictureList = productPictureMapper.select(productPicture);
+
         if (ArrayUtils.isEmpty(productPictureList.toArray())) {
-            throw new MyException(ExceptionEnum.PICTURE_NOT_FOUND);
+            return ResponseEntity.error(ResponseEnum.PICTURE_NOT_FOUND.getCode(), ResponseEnum.PICTURE_NOT_FOUND.getMsg());
         }
-        return productPictureList;
+        return ResponseEntity.ok(productPictureList);
     }
 }

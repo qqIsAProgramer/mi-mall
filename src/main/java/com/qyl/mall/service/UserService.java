@@ -1,6 +1,7 @@
 package com.qyl.mall.service;
 
 import com.qyl.mall.pojo.User;
+import com.qyl.mall.utils.ResponseEntity;
 
 /**
  * @Author: qyl
@@ -12,7 +13,7 @@ public interface UserService {
      * 用户注册
      * @param user
      */
-    void register(User user);
+    ResponseEntity<Void> register(User user);
 
     /**
      * 用户登录
